@@ -1,0 +1,182 @@
+$dark-blue: #008da3;
+$bg: #00b8d4;
+$gray: #989898;
+
+.navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+    width: 100%;
+    background-color: $bg;
+    padding: 0 6rem 0 3rem;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+    box-shadow: 0 5px 10px 0 rgb(0 0 0 / 20%);
+
+    .heading {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .play-btn {
+        position: absolute;
+        display: grid;
+        place-items: center;
+        width: 3rem;
+        height: 3rem;
+        right: 2rem;
+        bottom: -1.5rem;
+        border: 0;
+        outline: none;
+        border-radius: 50%;
+        background-color: $dark-blue;
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+        cursor: pointer;
+        color: #fff;
+
+        &:disabled {
+            background: $gray;
+            pointer-events: none;
+        }
+    }
+
+    .main-content {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+
+        .change-size {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            input {
+                appearance: none;
+                position: relative;
+                height: 1.5rem;
+                width: 10rem;
+                margin: 4px 0 0;
+                background-color: transparent;
+                cursor: pointer;
+
+                &::-webkit-slider-runnable-track {
+                    border-radius: 2px;
+                    width: 100%;
+                    height: 4px;
+                    background-color: $dark-blue;
+                }
+
+                &::-webkit-slider-thumb {
+                    appearance: none;
+                    border: none;
+                    border-radius: 50%;
+                    height: 4px;
+                    width: 4px;
+                    background-color: #fff;
+                    transform: scale(4, 4);
+                    transition: box-shadow 0.2s;
+                }
+
+                &:is(:hover, :focus)::-webkit-slider-thumb {
+                    box-shadow: 0 0 0 3px rgba(#fff, 0.3);
+                }
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .algo-name {
+            columns: 2;
+            gap: 0;
+            text-align: center;
+
+            div {
+                cursor: pointer;
+                padding: 4px 6px;
+
+                &.selected {
+                    font-weight: bold;
+                    cursor: default;
+                    background-color: $dark-blue;
+                    color: #fff;
+                    border-radius: 6px;
+                }
+            }
+        }
+
+        &.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+    }
+}
+
+.playground {
+    height: calc(100vh - 4rem);
+    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1px, 1fr));
+    padding: 5% 5% 0;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 767px) {
+    .navbar {
+        display: block;
+        text-align: center;
+        padding: 0;
+        height: 13rem;
+
+        .heading {
+            line-height: 4rem;
+            font-size: 1.5rem;
+        }
+
+        .main-content {
+            flex-direction: column;
+            width: 100%;
+
+            .change-size {
+                flex-direction: row;
+                gap: 1rem;
+                width: 75%;
+                justify-content: space-evenly;
+
+                input {
+                    width: 75%;
+                    max-width: 400px;
+                    margin-top: 0;
+
+                    &::-webkit-slider-thumb {
+                        box-shadow: 0 0 0 3px rgba(#fff, 0.3);
+                    }
+                }
+            }
+
+            .algo-name {
+                width: 75%;
+                max-width: 400px;
+
+                div {
+                    padding: 0.5rem;
+                }
+            }
+        }
+    }
+
+    .playground {
+        transform: rotate(90deg) translate(-44vw, -50%);
+        width: calc(var(--full-height) - 16rem);
+        transform-origin: left center;
+        height: 100vw;
+        position: absolute;
+        padding: 1rem 0 0;
+        display: inline-grid;
+    }
+}
